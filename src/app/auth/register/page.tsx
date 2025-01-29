@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function RegisterPage() {
@@ -8,6 +9,8 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [message, setMessage] = useState("");
+
+  const route = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -107,12 +110,22 @@ export default function RegisterPage() {
             />
           </div>
 
-          <button
-            type="submit"
-            className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-          >
-            Register
-          </button>
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              type="submit"
+              className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+            >
+              Register
+            </button>
+
+            <button
+              type="button"
+              className="border-blue-600 text-white py-2 rounded border-2 hover:border-blue-700 hover:border-2"
+              onClick={() => route.push("/auth/login")}
+            >
+              Login
+            </button>
+          </div>
 
           {message && (
             <p className="text-center mt-2" style={{ color: "red" }}>
