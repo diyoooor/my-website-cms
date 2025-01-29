@@ -42,18 +42,18 @@ export default function Sidebar() {
               <ul className="ml-4 mt-1 space-y-1">
                 <li>
                   <Link
-                    href="/dashboard/settings/product"
+                    href="/dashboard/settings/category"
                     className="text-blue-600"
                   >
-                    Product
+                    Category
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/dashboard/settings/order"
+                    href="/dashboard/settings/sub-category"
                     className="text-blue-600"
                   >
-                    Order
+                    Sub Category
                   </Link>
                 </li>
               </ul>
