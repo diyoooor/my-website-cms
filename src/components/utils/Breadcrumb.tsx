@@ -24,7 +24,7 @@ export default function Breadcrumb() {
       <ol className="flex items-center space-x-2 text-gray-500">
         {pathSegments.map((segment, index) => {
           const newStr =
-            segment.charAt(0).toUpperCase() + segment.slice(1, segment.length);
+            segment.charAt(0).toUpperCase() + segment.slice(1).split("-").join(" ")
 
           cumulativePath += `/${newStr}`; // build the path
 
