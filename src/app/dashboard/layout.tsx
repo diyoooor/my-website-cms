@@ -1,4 +1,5 @@
 // app/dashboard/layout.tsx
+import Breadcrumb from "@/components/utils/Breadcrumb";
 import React from "react";
 
 export const metadata = {
@@ -37,7 +38,10 @@ export default function DashboardLayout({
       </aside>
 
       {/* Main content area */}
-      <main className="flex-1 bg-white p-8">{children}</main>
+      <main className="flex-1 bg-white p-8">
+        <Breadcrumb />
+        {children}
+      </main>
     </section>
   );
 }
