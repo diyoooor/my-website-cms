@@ -1,6 +1,8 @@
-'use client'
+"use client";
 import { ColumnDef, DataTable } from "@/components/utils/DataTable";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { CreateProductModal } from "./components/CreateProductModal";
 
 interface MyItem {
   id: number;
@@ -16,6 +18,8 @@ const columns: ColumnDef<MyItem>[] = [
 ];
 
 const ProductPage = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const route = useRouter();
   const [items, setItems] = useState<MyItem[]>([
     { id: 1, name: "Item A", category: "Category 1" },
     { id: 2, name: "Item B", category: "Category 2" },
@@ -28,13 +32,11 @@ const ProductPage = () => {
   ]);
 
   const handleCreate = () => {
-    const maxId = items.length ? Math.max(...items.map((i) => i.id)) : 0;
-    const newItem: MyItem = {
-      id: maxId + 1,
-      name: `New Item ${maxId + 1}`,
-      category: "Uncategorized",
-    };
-    setItems((prev) => [...prev, newItem]);
+    setModalOpen(true);
+  };
+
+  const handleCreateProduct = () => {
+    // setItems((prev) => [...prev, productData]);
   };
 
   // Delete multiple items by their string IDs
@@ -46,7 +48,12 @@ const ProductPage = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">Dashboard Home</h1>
+      <h1 className="text-2xl font-bold">Products</h1>
+      <CreateProductModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onCreate={handleCreateProduct}
+      />
 
       <DataTable<MyItem>
         data={items}
