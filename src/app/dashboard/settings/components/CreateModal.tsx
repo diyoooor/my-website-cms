@@ -13,17 +13,17 @@ export interface ProductData {
   imageFile: File | null;
 }
 
-interface CreateProductModalProps {
+interface CreateModalProps {
   isOpen: boolean; // controls whether modal is visible
   onClose: () => void; // called when the modal should close
   onCreate: (data: ProductData) => void; // called when form is submitted
 }
 
-export function CreateProductModal({
+export function CreateModal({
   isOpen,
   onClose,
   onCreate,
-}: Readonly<CreateProductModalProps>) {
+}: Readonly<CreateModalProps>) {
   // ----- FORM STATES -----
   const [name, setName] = useState("");
   const [category, setCategory] = useState("electronics");

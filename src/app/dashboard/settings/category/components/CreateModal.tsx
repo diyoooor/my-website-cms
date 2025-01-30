@@ -3,43 +3,34 @@
 import React, { useState } from "react";
 
 // Optional: Define the shape of product data
-export interface ProductData {
+export interface CategoryData {
   name: string;
-  category: string;
-  condition: string;
   description: string;
-  price: number;
   imageUrl: string;
   imageFile: File | null;
 }
 
-interface CreateProductModalProps {
+interface CreateModalProps {
   isOpen: boolean; // controls whether modal is visible
   onClose: () => void; // called when the modal should close
-  onCreate: (data: ProductData) => void; // called when form is submitted
+  onCreate: (data: CategoryData) => void; // called when form is submitted
 }
 
-export function CreateProductModal({
+export function CreateModal({
   isOpen,
   onClose,
   onCreate,
-}: Readonly<CreateProductModalProps>) {
+}: Readonly<CreateModalProps>) {
   // ----- FORM STATES -----
   const [name, setName] = useState("");
-  const [category, setCategory] = useState("electronics");
-  const [condition, setCondition] = useState("new");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   // Clear form fields
   const clearForm = () => {
     setName("");
-    setCategory("electronics");
-    setCondition("new");
     setDescription("");
-    setPrice("");
     setImageUrl("");
     setImageFile(null);
   };
@@ -48,18 +39,15 @@ export function CreateProductModal({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const productData: ProductData = {
+    const categoryData: CategoryData = {
       name,
-      category,
-      condition,
       description,
-      price: parseFloat(price || "0"),
       imageUrl,
       imageFile,
     };
 
     // Call parent-supplied onCreate handler
-    onCreate(productData);
+    onCreate(categoryData);
 
     // Clear fields & close modal
     clearForm();
@@ -94,97 +82,21 @@ export function CreateProductModal({
           ✕
         </button>
 
-        <h2 className="text-xl font-bold mb-4">Create Product</h2>
+        <h2 className="text-xl font-bold mb-4">สร้างหมวดหมู่</h2>
         <form onSubmit={handleSubmit} className="space-y-4 text-black">
           {/* Product Name */}
           <div>
             <label htmlFor="name" className="block mb-1 font-semibold">
-              Product Name
+              ชื่อหมวดหมู่
             </label>
             <input
               id="name"
               type="text"
               className="w-full p-2 border border-gray-300 rounded"
-              placeholder="e.g. iPhone 12"
+              placeholder="ตย. คะน้า"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-            />
-          </div>
-
-          {/* Category (Select) */}
-          <div>
-            <label htmlFor="category" className="block mb-1 font-semibold">
-              Category
-            </label>
-            <select
-              id="category"
-              className="w-full p-2 border border-gray-300 rounded"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="electronics">Electronics</option>
-              <option value="fashion">Fashion</option>
-              <option value="home">Home</option>
-              <option value="sports">Sports</option>
-            </select>
-          </div>
-
-          {/* Condition (Radio) */}
-          <div>
-            <label className="block mb-1 font-semibold">Condition</label>
-            <div className="flex items-center gap-4">
-              <label className="flex items-center gap-1">
-                <input
-                  type="radio"
-                  name="condition"
-                  value="new"
-                  checked={condition === "new"}
-                  onChange={() => setCondition("new")}
-                />
-                New
-              </label>
-              <label className="flex items-center gap-1">
-                <input
-                  type="radio"
-                  name="condition"
-                  value="used"
-                  checked={condition === "used"}
-                  onChange={() => setCondition("used")}
-                />
-                Used
-              </label>
-            </div>
-          </div>
-
-          {/* Description (TextArea) */}
-          <div>
-            <label htmlFor="description" className="block mb-1 font-semibold">
-              Description
-            </label>
-            <textarea
-              id="description"
-              className="w-full p-2 border border-gray-300 rounded"
-              rows={3}
-              placeholder="Describe the product..."
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
-
-          {/* Price (Number) */}
-          <div>
-            <label htmlFor="price" className="block mb-1 font-semibold">
-              Price
-            </label>
-            <input
-              id="price"
-              type="number"
-              step="0.01"
-              className="w-full p-2 border border-gray-300 rounded"
-              placeholder="0.00"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
             />
           </div>
 
@@ -216,6 +128,21 @@ export function CreateProductModal({
               onChange={(e) =>
                 setImageFile(e.target.files ? e.target.files[0] : null)
               }
+            />
+          </div>
+
+          {/* Description (TextArea) */}
+          <div>
+            <label htmlFor="description" className="block mb-1 font-semibold">
+              คำอธิบาย
+            </label>
+            <textarea
+              id="description"
+              className="w-full p-2 border border-gray-300 rounded"
+              rows={3}
+              placeholder="คำอธิบายหมวดหมู่"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
 

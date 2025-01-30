@@ -3,30 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-interface ISidebarItem {
-  title: string;
-  href: string;
-  subItems?: ISubSidebar[];
-}
-
-interface ISubSidebar {
-  title: string;
-  href: string;
-}
-
 export default function Sidebar() {
-  const sideBarItem: ISidebarItem[] = [
-    { title: "หน้า��ลัก", href: "/dashboard" },
-    { title: "สินค้า", href: "/dashboard/products" },
-    {
-      title: "คำสั่ง��ื้อ",
-      href: "/dashboard/orders",
-      subItems: [
-        { title: "รายชื่อคำสั่ง��ื้อ", href: "/dashboard/orders/list" },
-        { title: "รายละเอียดคำสั่ง��ื้อ", href: "/dashboard/orders/details" },
-      ],
-    },
-  ];
 
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
 

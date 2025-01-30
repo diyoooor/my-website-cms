@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Swal from "sweetalert2";
 
 export interface ColumnDef<T> {
   key: keyof T; // which property to display
@@ -122,6 +123,7 @@ export function DataTable<T>({
 
   // On delete selected
   const handleDeleteSelected = () => {
+    Swal.fire('deleteSelected', 'deleteSelected', "success")
     if (onDeleteSelected && selectedIds.size > 0) {
       onDeleteSelected(Array.from(selectedIds));
       setSelectedIds(new Set()); // clear local selection
@@ -144,7 +146,7 @@ export function DataTable<T>({
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold">{tableTitle}</h1>
+      <h1 className="text-2xl font-bold text-black">{tableTitle}</h1>
 
       {/* Actions: Search, Create, Delete */}
       <div className="flex items-center gap-2">
@@ -163,7 +165,7 @@ export function DataTable<T>({
             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             onClick={onCreate}
           >
-            Create
+            เพิ่ม
           </button>
         )}
 
@@ -174,7 +176,7 @@ export function DataTable<T>({
             onClick={handleDeleteSelected}
             disabled={selectedIds.size === 0}
           >
-            Delete Selected
+            ลบ{" "}
           </button>
         )}
       </div>
