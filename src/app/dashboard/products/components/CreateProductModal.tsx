@@ -23,7 +23,7 @@ export function CreateProductModal({
   isOpen,
   onClose,
   onCreate,
-}: CreateProductModalProps) {
+}: Readonly<CreateProductModalProps>) {
   // ----- FORM STATES -----
   const [name, setName] = useState("");
   const [category, setCategory] = useState("electronics");

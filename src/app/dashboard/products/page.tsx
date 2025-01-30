@@ -1,6 +1,5 @@
 "use client";
 import { ColumnDef, DataTable } from "@/components/utils/DataTable";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { CreateProductModal } from "./components/CreateProductModal";
 
@@ -19,7 +18,6 @@ const columns: ColumnDef<MyItem>[] = [
 
 const ProductPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const route = useRouter();
   const [items, setItems] = useState<MyItem[]>([
     { id: 1, name: "Item A", category: "Category 1" },
     { id: 2, name: "Item B", category: "Category 2" },
@@ -48,7 +46,7 @@ const ProductPage = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">Products</h1>
+      <h1 className="text-2xl font-bold text-black">สินค้า</h1>
       <CreateProductModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}

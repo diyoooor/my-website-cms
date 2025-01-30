@@ -180,7 +180,7 @@ export function DataTable<T>({
       </div>
 
       {/* Table */}
-      <table className="w-full border-collapse bg-white">
+      <table className="w-full border-collapse bg-white text-black">
         <thead>
           <tr className="bg-gray-100 border-b">
             {/* Checkbox col */}

@@ -3,28 +3,52 @@
 import { useState } from "react";
 import Link from "next/link";
 
+interface ISidebarItem {
+  title: string;
+  href: string;
+  subItems?: ISubSidebar[];
+}
+
+interface ISubSidebar {
+  title: string;
+  href: string;
+}
+
 export default function Sidebar() {
+  const sideBarItem: ISidebarItem[] = [
+    { title: "หน้า��ลัก", href: "/dashboard" },
+    { title: "สินค้า", href: "/dashboard/products" },
+    {
+      title: "คำสั่ง��ื้อ",
+      href: "/dashboard/orders",
+      subItems: [
+        { title: "รายชื่อคำสั่ง��ื้อ", href: "/dashboard/orders/list" },
+        { title: "รายละเอียดคำสั่ง��ื้อ", href: "/dashboard/orders/details" },
+      ],
+    },
+  ];
+
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
 
   return (
-    <aside className="w-64 bg-gray-200 p-4">
+    <aside className="w-64 bg-green-400 p-4">
       <nav>
-        <ul className="space-y-2">
+        <ul className="space-y-2 text-xl font-bold">
           <li>
             <Link href="/dashboard" className="text-blue-600">
-              Home
+              หน้าหลัก
             </Link>
           </li>
 
           <li>
             <Link href="/dashboard/products" className="text-blue-600">
-              Products
+              สินค้า
             </Link>
           </li>
 
           <li>
             <Link href="/dashboard/orders" className="text-blue-600">
-              Orders
+              คำสั่งซื้อ
             </Link>
           </li>
 
@@ -35,7 +59,7 @@ export default function Sidebar() {
               onClick={() => setSettingsOpen((prev) => !prev)}
               className="flex items-center text-blue-600 hover:underline"
             >
-              Settings{" "}
+              ตั้งค่า{" "}
               <span className="ml-1 text-sm"> {settingsOpen ? "▲" : "▼"} </span>
             </button>
             {settingsOpen && (
@@ -45,7 +69,7 @@ export default function Sidebar() {
                     href="/dashboard/settings/category"
                     className="text-blue-600"
                   >
-                    Category
+                    หมวดหมู่
                   </Link>
                 </li>
                 <li>
@@ -53,7 +77,7 @@ export default function Sidebar() {
                     href="/dashboard/settings/sub-category"
                     className="text-blue-600"
                   >
-                    Sub Category
+                    หมวดหมู่ย่อย
                   </Link>
                 </li>
               </ul>
